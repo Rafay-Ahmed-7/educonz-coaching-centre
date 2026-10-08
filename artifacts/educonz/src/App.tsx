@@ -3,6 +3,7 @@ import { Link, Route, Switch, useLocation } from 'wouter';
 import { ArrowRight, ArrowUpRight, BookOpen, Check, GraduationCap, Menu, MapPin, MessageCircle, Phone, X, Star, FlaskConical, Calculator, Languages, Users, ClipboardCheck, HeartHandshake, Library, Award, BookMarked, Mail, Facebook, Instagram, Snowflake, Wallet, Bell, CalendarCheck } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { Form } from '@/components/ui/form';
+import educonzLogo from '../../../public/ChatGPT_Image_Oct_8,_2026,_10_36_12_PM.png';
 
 const phone = '+923112563534';
 const phoneLabel = '+92 311 2563534';
@@ -40,7 +41,7 @@ function Header() {
   const [open,setOpen]=useState(false);const [path]=useLocation();
   useEffect(()=>setOpen(false),[path]);
   return <header className="header"><div className="container-wide nav-wrap">
-    <Link href="/" data-testid="link-header-home" className="brand" aria-label="Educonz home"><span className="brand-mark"><BookOpen size={22}/></span><span className="brand-copy"><b>educonz</b><small>COACHING CENTRE</small></span></Link>
+    <Link href="/" data-testid="link-header-home" className="brand" aria-label="Educonz home"><span className="brand-mark"><img src={educonzLogo} alt="Educonz" /></span><span className="brand-copy"><b>educonz</b><small>COACHING CENTRE</small></span></Link>
     <nav id="site-navigation" className={`nav-links ${open?'nav-open':''}`} aria-label="Main navigation">
       {pages.map(([label,href])=><Link key={href} href={href} aria-current={path===href?'page':undefined} data-testid={`nav-${label.toLowerCase()}`} className={`nav-link ${path===href?'nav-current':''}`}>{label}</Link>)}
       <Link href="/admissions" data-testid="nav-admissions-apply" className="nav-apply">Admissions <ArrowUpRight size={15}/></Link>
@@ -50,7 +51,7 @@ function Header() {
 }
 function Footer() {
   return <footer className="footer"><div className="container-wide footer-grid">
-    <div><Link href="/" data-testid="link-footer-home" className="brand brand-footer"><span className="brand-mark"><BookOpen size={22}/></span><span className="brand-copy"><b>educonz</b><small>COACHING CENTRE</small></span></Link><p className="footer-text">Strong concepts. Thoughtful preparation.<br/>A steady path through school and beyond.</p><div className="footer-social"><a data-testid="link-footer-facebook" href={facebookUrl} target="_blank" rel="noreferrer" aria-label="Facebook"><Facebook size={16}/></a><a data-testid="link-footer-instagram" href={instagramUrl} target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram size={16}/></a><a data-testid="link-footer-email" href={`mailto:${email}`} aria-label="Email"><Mail size={16}/></a></div></div>
+    <div><Link href="/" data-testid="link-footer-home" className="brand brand-footer"><span className="brand-mark"><img src={educonzLogo} alt="Educonz" /></span><span className="brand-copy"><b>educonz</b><small>COACHING CENTRE</small></span></Link><p className="footer-text">Strong concepts. Thoughtful preparation.<br/>A steady path through school and beyond.</p><div className="footer-social"><a data-testid="link-footer-facebook" href={facebookUrl} target="_blank" rel="noreferrer" aria-label="Facebook"><Facebook size={16}/></a><a data-testid="link-footer-instagram" href={instagramUrl} target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram size={16}/></a><a data-testid="link-footer-email" href={`mailto:${email}`} aria-label="Email"><Mail size={16}/></a></div></div>
     <div><h3>Explore</h3><div className="footer-links">{pages.slice(1,6).map(([n,h])=><Link data-testid={`footer-${n.toLowerCase()}`} key={h} href={h}>{n}</Link>)}<Link data-testid="footer-admissions" href="/admissions">Admissions</Link></div></div>
     <div><h3>Find us</h3><p data-testid="text-footer-location">1-A-1/9, Nazimabad #1,<br/>Near PSO Petrol Pump, Karachi</p><a data-testid="link-footer-phone" href={`tel:${phone}`}>{phoneLabel}</a><a data-testid="link-footer-email-text" href={`mailto:${email}`} className="footer-email">{email}</a><a data-testid="link-footer-directions" className="footer-map" href={mapUrl} target="_blank" rel="noreferrer">Get directions <ArrowUpRight size={14}/></a></div>
   </div><div className="container-wide footer-bottom"><span>© {new Date().getFullYear()} Educonz Coaching Centre</span><span>Learning, grounded in understanding.</span></div></footer>;
