@@ -41,7 +41,7 @@ function Header() {
   const [open,setOpen]=useState(false);const [path]=useLocation();
   useEffect(()=>setOpen(false),[path]);
   return <header className="header"><div className="container-wide nav-wrap">
-    <Link href="/" data-testid="link-header-home" className="brand" aria-label="Educonz home"><span className="brand-mark"><img src={educonzLogo} alt="Educonz" /></span><span className="brand-copy"><b>educonz</b><small>COACHING CENTRE</small></span></Link>
+    <Link href="/" data-testid="link-header-home" className="brand" aria-label="Educonz home"><span className="brand-copy"><b>EDUCONZ</b><small>COACHING CENTRE</small></span><span className="brand-mark"><img src={educonzLogo} alt="Educonz" /></span></Link>
     <nav id="site-navigation" className={`nav-links ${open?'nav-open':''}`} aria-label="Main navigation">
       {pages.map(([label,href])=><Link key={href} href={href} aria-current={path===href?'page':undefined} data-testid={`nav-${label.toLowerCase()}`} className={`nav-link ${path===href?'nav-current':''}`}>{label}</Link>)}
       <Link href="/admissions" data-testid="nav-admissions-apply" className="nav-apply">Admissions <ArrowUpRight size={15}/></Link>
