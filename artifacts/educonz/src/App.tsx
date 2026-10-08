@@ -32,11 +32,11 @@ function Header() {
   useEffect(()=>setOpen(false),[path]);
   return <header className="header"><div className="container-wide nav-wrap">
     <Link href="/" data-testid="link-header-home" className="brand" aria-label="Educonz home"><span className="brand-mark"><BookOpen size={22}/></span><span className="brand-copy"><b>educonz</b><small>COACHING CENTRE</small></span></Link>
-    <nav className={`nav-links ${open?'nav-open':''}`} aria-label="Main navigation">
-      {pages.map(([label,href])=><Link key={href} href={href} data-testid={`nav-${label.toLowerCase()}`} className={`nav-link ${path===href?'nav-current':''}`}>{label}</Link>)}
+    <nav id="site-navigation" className={`nav-links ${open?'nav-open':''}`} aria-label="Main navigation">
+      {pages.map(([label,href])=><Link key={href} href={href} aria-current={path===href?'page':undefined} data-testid={`nav-${label.toLowerCase()}`} className={`nav-link ${path===href?'nav-current':''}`}>{label}</Link>)}
       <Link href="/admissions" data-testid="nav-admissions-apply" className="nav-apply">Admissions <ArrowUpRight size={15}/></Link>
     </nav>
-    <button className="menu-toggle" data-testid="button-mobile-navigation" aria-label={open?'Close navigation':'Open navigation'} aria-expanded={open} onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button>
+    <button className="menu-toggle" data-testid="button-mobile-navigation" aria-label={open?'Close navigation':'Open navigation'} aria-controls="site-navigation" aria-expanded={open} onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button>
   </div></header>;
 }
 function Footer() {
