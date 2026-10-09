@@ -41,27 +41,72 @@ function Header() {
   const [open,setOpen]=useState(false);const [path]=useLocation();
   useEffect(()=>setOpen(false),[path]);
   return <header className="header"><div className="container-wide nav-wrap">
-    <Link href="/" data-testid="link-header-home" className="brand" aria-label="Educonz home"><span className="brand-copy"><b>EDUCONZ</b><small>COACHING CENTRE</small></span><span className="brand-mark"><img src={educonzLogo} alt="Educonz" /></span></Link>
+    <Link href="/" data-testid="link-header-home" className="brand" aria-label="Educonz Coaching Centre home">
+      <div className="brand-badge">
+        <img src="/educonz-official-logo.png" alt="Educonz Coaching Centre - Sir Hammad Abbas" className="brand-logo-img" />
+      </div>
+    </Link>
     <nav id="site-navigation" className={`nav-links ${open?'nav-open':''}`} aria-label="Main navigation">
       {pages.map(([label,href])=><Link key={href} href={href} aria-current={path===href?'page':undefined} data-testid={`nav-${label.toLowerCase()}`} className={`nav-link ${path===href?'nav-current':''}`}>{label}</Link>)}
-      <Link href="/admissions" data-testid="nav-admissions-apply" className="nav-apply">Admissions <ArrowUpRight size={15}/></Link>
+      <Link href="/admissions" data-testid="nav-admissions-apply" className="nav-apply">Admissions Open <ArrowUpRight size={15}/></Link>
     </nav>
     <button className="menu-toggle" data-testid="button-mobile-navigation" aria-label={open?'Close navigation':'Open navigation'} aria-controls="site-navigation" aria-expanded={open} onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button>
   </div></header>;
 }
 function Footer() {
   return <footer className="footer"><div className="container-wide footer-grid">
-    <div><Link href="/" data-testid="link-footer-home" className="brand brand-footer"><span className="brand-mark"><img src={educonzLogo} alt="Educonz" /></span><span className="brand-copy"><b>educonz</b><small>COACHING CENTRE</small></span></Link><p className="footer-text">Strong concepts. Thoughtful preparation.<br/>A steady path through school and beyond.</p><div className="footer-social"><a data-testid="link-footer-facebook" href={facebookUrl} target="_blank" rel="noreferrer" aria-label="Facebook"><Facebook size={16}/></a><a data-testid="link-footer-instagram" href={instagramUrl} target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram size={16}/></a><a data-testid="link-footer-email" href={`mailto:${email}`} aria-label="Email"><Mail size={16}/></a></div></div>
-    <div><h3>Explore</h3><div className="footer-links">{pages.slice(1,6).map(([n,h])=><Link data-testid={`footer-${n.toLowerCase()}`} key={h} href={h}>{n}</Link>)}<Link data-testid="footer-admissions" href="/admissions">Admissions</Link></div></div>
-    <div><h3>Find us</h3><p data-testid="text-footer-location">1-A-1/9, Nazimabad #1,<br/>Near PSO Petrol Pump, Karachi</p><a data-testid="link-footer-phone" href={`tel:${phone}`}>{phoneLabel}</a><a data-testid="link-footer-email-text" href={`mailto:${email}`} className="footer-email">{email}</a><a data-testid="link-footer-directions" className="footer-map" href={mapUrl} target="_blank" rel="noreferrer">Get directions <ArrowUpRight size={14}/></a></div>
-  </div><div className="container-wide footer-bottom"><span>© {new Date().getFullYear()} Educonz Coaching Centre</span><span>Learning, grounded in understanding.</span></div></footer>;
+    <div><Link href="/" data-testid="link-footer-home" className="brand brand-footer"><div className="brand-badge footer-brand-badge"><img src="/educonz-official-logo.png" alt="Educonz Coaching Centre" className="brand-logo-img" /></div></Link><p className="footer-text">Strong concepts. Consistent effort.<br/>Every page takes you closer to academic success.</p><div className="footer-social"><a data-testid="link-footer-facebook" href={facebookUrl} target="_blank" rel="noreferrer" aria-label="Facebook"><Facebook size={16}/></a><a data-testid="link-footer-instagram" href={instagramUrl} target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram size={16}/></a><a data-testid="link-footer-email" href={`mailto:${email}`} aria-label="Email"><Mail size={16}/></a></div></div>
+    <div><h3>Explore Programs</h3><div className="footer-links">{pages.slice(1,6).map(([n,h])=><Link data-testid={`footer-${n.toLowerCase()}`} key={h} href={h}>{n}</Link>)}<Link data-testid="footer-admissions" href="/admissions">Admissions</Link></div></div>
+    <div><h3>Contact & Location</h3><p data-testid="text-footer-location">1-A-1/9, Nazimabad #1,<br/>Near PSO Petrol Pump, Karachi</p><a data-testid="link-footer-phone" href={`tel:${phone}`}>{phoneLabel}</a><a data-testid="link-footer-email-text" href={`mailto:${email}`} className="footer-email">{email}</a><a data-testid="link-footer-directions" className="footer-map" href={mapUrl} target="_blank" rel="noreferrer">Get directions <ArrowUpRight size={14}/></a></div>
+  </div><div className="container-wide footer-bottom"><span>© {new Date().getFullYear()} Educonz Coaching Centre · Sir Hammad Abbas</span><span>Concept-based learning for Classes IX–XII</span></div></footer>;
 }
 function Shell({path,children}:{path:string;children:ReactNode}) {return <div className="site-shell"><Meta path={path}/><Header/><main>{children}</main><Footer/></div>}
 function PageIntro({kicker,title,copy}:{kicker:string;title:string;copy:string}) {return <section className="page-intro"><div className="container-wide"><div className="eyebrow">{kicker}</div><h1>{title}</h1><p>{copy}</p></div></section>}
 function Home() {
- return <Shell path="/"><section className="hero"><div className="hero-wash"></div><div className="container-wide hero-grid"><div className="hero-copy reveal"><div className="hero-kicker"><span></span> Admissions Open · Session {session}</div><h1>Build Strong<br/><em>Concepts.</em><br/>Prepare With<br className="mobile-break"/> Confidence.</h1><p>Quality academic coaching for Classes IX–XII with experienced faculty, concept-based learning and regular assessments in Nazimabad, Karachi.</p><div className="hero-actions"><ButtonLink href="/programs">Explore Programs</ButtonLink><ButtonLink href="/contact" secondary>Enquire Now</ButtonLink></div><div className="hero-note" data-testid="text-home-location"><MapPin size={15}/> {addressLine}</div></div>
-  <div className="hero-visual"><div className="hero-photo"><img src="/learning-space.jpg" alt="Illustrative sunlit study space with books and classroom desks" width="800" height="600"/></div><div className="visual-label"><span className="visual-icon"><GraduationCap size={21}/></span><span><b>Learn with clarity</b><small>Practice with purpose</small></span></div><span className="hero-circle"></span><span className="hero-caption">EDUCONZ / KARACHI</span></div>
- </div><div className="hero-bottom container-wide"><span>SECONDARY & INTERMEDIATE</span><span>IX — XII</span></div></section>
+ return <Shell path="/"><section className="hero"><div className="hero-backdrop-pattern"></div><div className="container-wide hero-grid"><div className="hero-copy reveal">
+    <div className="hero-kicker"><span className="pulse-dot"></span> Admissions Open · Session {session}</div>
+    <div className="hero-pretitle">EDUCONZ COACHING CENTRE · NAZIMABAD</div>
+    <h1>EVERY PAGE<br/><span className="hero-highlight">GETS YOU CLOSER</span><br/>TO SUCCESS.</h1>
+    <p className="hero-subhead">No shortcuts. Just consistent effort, page by page. Quality Sindh Board coaching for Classes IX–XII with concept clarity, air-conditioned facilities, and regular progress testing.</p>
+    <div className="hero-actions">
+      <ButtonLink href="/programs">Explore Our Programs</ButtonLink>
+      <ButtonLink href="/contact" secondary>Enquire Now</ButtonLink>
+    </div>
+    <div className="hero-highlights-strip">
+      <div className="hero-highlight-pill"><MapPin size={14}/> <span>1-A-1/9, Nazimabad #1, Karachi</span></div>
+      <div className="hero-highlight-pill"><Award size={14}/> <span>Sindh Board IX–XII</span></div>
+      <div className="hero-highlight-pill"><Star size={14} fill="currentColor"/> <span>4.3/5 Rated on Google</span></div>
+    </div>
+  </div>
+  <div className="hero-visual-col">
+    <div className="hero-stage">
+      <div className="hero-red-canvas"></div>
+      <div className="hero-graphic-circle"></div>
+      <div className="hero-badge-tag"><span className="pulse-dot"></span> SESSION {session}</div>
+      <div className="hero-student-wrapper">
+        <img 
+          src="/hero-student.png" 
+          alt="Educonz student studying with headphones and books, representing focused academic preparation" 
+          className="hero-student-img" 
+          width="755" 
+          height="750"
+        />
+      </div>
+      <div className="hero-quote-card">
+        <div className="quote-mark">“</div>
+        <p>No shortcuts. Just consistent effort, page by page.</p>
+        <small>Educonz Academic Philosophy</small>
+      </div>
+      <div className="hero-stats-card">
+        <div className="stats-icon"><GraduationCap size={22}/></div>
+        <div className="stats-info">
+          <b>Classes IX – XII</b>
+          <span>Science &amp; Commerce</span>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div><div className="hero-bottom container-wide"><span>SECONDARY &amp; INTERMEDIATE COACHING</span><span>SCIENCE &amp; COMMERCE</span><span>SINDH BOARD KARACHI</span></div></section>
  <section className="admission-strip"><div className="container-wide admission-inner"><div className="admission-badge"><span className="pulse-dot"></span> ADMISSIONS OPEN · {session.toUpperCase()}</div><div><h2>Admissions Open for {session}</h2><p>Classes IX–XII <span>|</span> Science &amp; Commerce <span>|</span> Sindh Board</p></div><ButtonLink href="/admissions" secondary>Apply Now</ButtonLink></div></section>
  <section className="section-pad"><div className="container-wide"><div className="section-heading"><div><div className="eyebrow">Why Educonz</div><h2>Good learning starts<br/>with strong foundations.</h2></div><p>Progress is built one idea at a time—with clear teaching, purposeful practice and support that keeps students moving forward.</p></div>
  <div className="pillars">{[[CalendarCheck,'Weekly & Monthly Assessments','Regular practice and assessments help identify strengths and areas that need attention.'],[Snowflake,'Air-Conditioned Classrooms','Comfortable, focused learning spaces that help students concentrate during lessons.'],[Wallet,'Affordable Fee Structure','Quality coaching at a fee structure designed to be accessible for families.'],[Bell,'Automated Parent Alerts','Keep families informed with automated message alerts about progress and attendance.']].map(([Icon,title,copy]:any,i)=><article className="pillar" key={title}><span className="pillar-no">0{i+1}</span><span className="pillar-icon"><Icon size={22}/></span><h3>{title}</h3><p>{copy}</p></article>)}</div>
